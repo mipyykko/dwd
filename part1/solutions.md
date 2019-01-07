@@ -1,5 +1,6 @@
 ### 1.1
-```$ docker ps -a
+```
+$ docker ps -a
 CONTAINER ID        IMAGE                         COMMAND                  CREATED              STATUS                      PORTS               NAMES
 d3a723b23a69        nginx                         "nginx -g 'daemon of…"   37 seconds ago       Up 36 seconds               80/tcp              competent_kalam
 1a6b1f4e220b        nginx                         "nginx -g 'daemon of…"   39 seconds ago       Exited (0) 15 seconds ago                       pensive_williamson
@@ -7,14 +8,16 @@ d3a723b23a69        nginx                         "nginx -g 'daemon of…"   37 
 ```
 
 ### 1.2
-```$ docker ps -a
+```
+$ docker ps -a
 CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
 $ docker images
 REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
 ```
 
 ### 1.3
-```$ docker run -d -it --name curler ubuntu:16.04 sh -c 'read website; sleep 3; curl http://$website;'
+```
+$ docker run -d -it --name curler ubuntu:16.04 sh -c 'read website; sleep 3; curl http://$website;'
 5487da814561cfdfcbe316247717917aa9ef5032afef88fdc2e2e404158d6684
 $ docker exec -it curler bash
 root@5487da814561:/# apt-get update
@@ -37,7 +40,8 @@ helsinki.fi
 ### 1.4
 
 #### Dockerfile
-```FROM ubuntu:16.04
+```
+FROM ubuntu:16.04
 
 WORKDIR /
 RUN apt-get update && apt-get install -y curl
@@ -46,7 +50,8 @@ RUN chmod u+x curler.sh
 CMD ["./curler.sh"]
 ```
 
-```$ docker run -it curler
+```
+$ docker run -it curler
 helsinki.fi
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
 <html><head>
@@ -60,7 +65,8 @@ helsinki.fi
 ### 1.5
 
 #### Dockerfile
-```FROM ubuntu:16.04
+```
+FROM ubuntu:16.04
 
 COPY ./ example/
 WORKDIR /example
@@ -78,7 +84,8 @@ CMD serve -s -l 5000 dist
 ### 1.6
 
 #### Dockerfile
-```FROM ubuntu:16.04
+```
+FROM ubuntu:16.04
 
 COPY ./ backend/
 WORKDIR /backend
@@ -93,5 +100,7 @@ RUN npm install
 CMD npm start
 ```
 
-```$ docker run -v ${pwd}:/backend -p 8000:8000 backend```
+```
+$ docker run -v ${pwd}:/backend -p 8000:8000 backend
+```
 
