@@ -82,3 +82,31 @@ services:
     ports:
       - 5000:5000
 ```
+
+### 2.4
+```
+version: "3.5"
+
+services:
+  ml-frontend:
+    image: ml-kurkkumopo-frontend
+    container_name: ml_frontend
+    links:
+      - ml_backend
+    ports:
+      - 3000:3000
+  ml_backend:
+    image: ml-kurkkumopo-backend
+    container_name: ml_backend
+    links:
+      - ml_training
+    volumes:
+      - "./ml-kurkkumopo-training/model:/src/model"
+    ports: 
+      - 5000:5000
+  ml_training:
+    image: ml-kurkkumopo-training
+    container_name: ml_training
+    volumes:
+      - "./ml-kurkkumopo-training:/src"
+```
