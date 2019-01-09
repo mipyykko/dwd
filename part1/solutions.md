@@ -104,3 +104,45 @@ CMD npm start
 $ docker run -v ${pwd}:/backend -p 8000:8000 backend
 ```
 
+### 1.7
+
+### frontend Dockerfile:
+
+```
+FROM ubuntu:16.04
+
+COPY ./ example/
+WORKDIR /example
+EXPOSE 5000
+
+RUN apt-get update && apt-get install -y curl
+RUN curl -sL https://deb.nodesource.com/setup_10.x | bash
+RUN apt-get install -y nodejs
+
+RUN npm install && npm install -g serve && API_URL=http://localhost:8000/ npm run build
+
+CMD serve -s -l 5000 dist
+```
+
+### backend Dockerfile: 
+
+```
+FROM ubuntu:16.04
+
+COPY ./ backend/
+WORKDIR /backend
+EXPOSE 8000
+
+RUN apt-get update && apt-get install -y curl 
+RUN curl -sL https://deb.nodesource.com/setup_10.x | bash
+RUN apt-get install -y nodejs
+
+RUN npm install
+
+CMD FRONT_URL=http://localhost:5000 npm start
+```
+
+```
+$ docker run -p 8000:8000 backend
+$ docker run -p 5000:5000 example
+```
