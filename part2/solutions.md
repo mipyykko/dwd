@@ -110,3 +110,46 @@ services:
     volumes:
       - "./ml-kurkkumopo-training:/src"
 ```
+
+### 2.5
+```
+version: '3.5'
+
+services:
+  redis:
+    image: redis
+    container_name: redis
+    ports:
+     - "6379"
+  db:
+    image: postgres
+    container_name: db
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=password
+  backend:
+    image: backend
+    container_name: backend
+    environment:
+      - REDIS=redis
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=password
+      - DB_NAME=postgres
+      - DB_HOST=db
+    ports:
+      - 8000:8000
+    links:
+      - redis
+  frontend:
+    image: example
+    container_name: frontend
+    ports:
+      - 5000:5000
+  proxy:
+    image: nginx
+    container_name: proxy
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro  
+    ports:
+      - 80:80
+```
