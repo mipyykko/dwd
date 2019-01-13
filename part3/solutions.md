@@ -12,20 +12,6 @@ backend                  latest              5ddc5bc2a065        8 seconds ago  
 example                  latest              eca2c3137879        40 seconds ago      445MB
 ```
 
-```
-
-$ docker history backend
-IMAGE               CREATED             CREATED BY                                      SIZE                COMMENT
-44c888700e2f        7 minutes ago       /bin/sh -c #(nop)  CMD ["/bin/sh" "-c" "npm …   0B                  
-4b56a567eae9        7 minutes ago       /bin/sh -c #(nop)  USER app                     0B                  
-0c2ed024e303        7 minutes ago       /bin/sh -c apt-get update && apt-get install…   225MB               
-$ docker history example
-IMAGE               CREATED             CREATED BY                                      SIZE                COMMENT
-e616a3c1de13        3 minutes ago       /bin/sh -c #(nop)  CMD ["/bin/sh" "-c" "serv…   0B                  
-7bd18b5189c8        3 minutes ago       /bin/sh -c #(nop)  USER app                     0B                  
-08919c420f89        3 minutes ago       /bin/sh -c apt-get update && apt-get install…   353MB               
-```
-
 ##### backend Dockerfile
 ```
 FROM ubuntu:16.04
