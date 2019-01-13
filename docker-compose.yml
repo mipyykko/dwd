@@ -4,12 +4,17 @@ services:
   redis:
     image: redis
     container_name: redis
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - redis-data:/data
     ports:
      - "6379"
   db:
     image: postgres
     container_name: db
     restart: always
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
     environment:
       - POSTGRES_PASSWORD=password
   backend:
@@ -37,3 +42,10 @@ services:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro  
     ports:
       - 80:80
+    depends_on:
+      - backend
+
+volumes:
+  redis-data:
+  postgres-data:
+    
